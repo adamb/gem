@@ -1,6 +1,12 @@
 import yfinance as yf
 import pandas as pd
+import argparse
 from datetime import datetime, timedelta
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Calculate GEM strategy allocation for a specific date')
+    parser.add_argument('--date', type=str, help='Date to calculate GEM for (YYYY-MM-DD format)', default=None)
+    return parser.parse_args()
 
 # Define tickers for GEM
 tickers = {
@@ -9,8 +15,16 @@ tickers = {
     "BND": "BND"    # Bonds
 }
 
-# Get about 500 days to ensure 252 trading days are covered
-end_date = datetime.today()
+# Parse command line arguments
+args = parse_arguments()
+
+# Set end date based on command line argument or use today
+if args.date:
+    end_date = datetime.strptime(args.date, "%Y-%m-%d")
+else:
+    end_date = datetime.today()
+
+# Get about 500 days before the end date to ensure 252 trading days are covered
 start_date = end_date - timedelta(days=500)
 
 # Download adjusted close prices (default is now adjusted)
@@ -28,6 +42,7 @@ data = data['Close'].dropna()
 print(f"\nData shape: {data.shape}")
 print(f"Data date range: {data.index[0]} to {data.index[-1]}")
 print(f"Trading days in dataset: {len(data)}")
+print(f"GEM calculation date: {end_date.strftime('%Y-%m-%d')}")
 
 # Calculate 252-trading-day returns
 returns = {}
@@ -35,8 +50,10 @@ for label, symbol in tickers.items():
     if symbol in data.columns:
         print(f"\n{label} ({symbol}) data points: {len(data[symbol])}")
         if len(data[symbol]) >= 252:
-            current = data[symbol].iloc[-1]
-            past = data[symbol].iloc[-252]
+            # Find the closest date to end_date in the data
+            closest_date_idx = data.index.get_indexer([end_date], method='pad')[0]
+            current = data[symbol].iloc[closest_date_idx]
+            past = data[symbol].iloc[closest_date_idx - 252]
             returns[label] = (current / past) - 1
             print(f"{label} ({symbol}): {returns[label]*100:.2f}%")
         else:
