@@ -53,7 +53,13 @@ for label, symbol in tickers.items():
             # Find the closest date to end_date in the data
             closest_date_idx = data.index.get_indexer([end_date], method='pad')[0]
             current = data[symbol].iloc[closest_date_idx]
-            past = data[symbol].iloc[closest_date_idx - 252]
+            
+            # Get the price from exactly 252 trading days before the current date
+            if closest_date_idx >= 252:
+                past = data[symbol].iloc[closest_date_idx - 252]
+            else:
+                print(f"{label} ({symbol}): Not enough data (need 252 trading days before the calculation date)")
+                continue
             returns[label] = (current / past) - 1
             print(f"{label} ({symbol}): {returns[label]*100:.2f}%")
         else:
