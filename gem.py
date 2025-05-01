@@ -32,6 +32,8 @@ for label, symbol in tickers.items():
         past = data[symbol].iloc[-252]
         returns[label] = (current / past) - 1
         print(f"{label} ({symbol}): {returns[label]*100:.2f}%")
+    else:
+        print(f"{label} ({symbol}): Not enough data")
 
 # Sort and choose best performer with positive return
 sorted_returns = sorted(returns.items(), key=lambda x: x[1], reverse=True)
@@ -44,5 +46,8 @@ else:
 
 # Print all returns
 print("\nAll 252-trading-day returns:")
-for k, v in sorted_returns:
-    print(f"{k}: {v*100:.2f}%")
+if sorted_returns:
+    for k, v in sorted_returns:
+        print(f"{k}: {v*100:.2f}%")
+else:
+    print("No valid returns calculated")
