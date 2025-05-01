@@ -31,6 +31,7 @@ for label, symbol in tickers.items():
         current = data[symbol].iloc[-1]
         past = data[symbol].iloc[-252]
         returns[label] = (current / past) - 1
+        print(f"{label} ({symbol}): {returns[label]*100:.2f}%")
 
 # Sort and choose best performer with positive return
 sorted_returns = sorted(returns.items(), key=lambda x: x[1], reverse=True)
