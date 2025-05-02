@@ -42,6 +42,12 @@ python gem.py
 venv/bin/python gem.py
 ```
 
+To calculate GEM for a specific date:
+
+```bash
+python gem.py --date 2025-04-04
+```
+
 This will:
 - Download historical prices
 - Calculate 252-trading-day returns
