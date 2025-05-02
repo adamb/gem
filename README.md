@@ -39,6 +39,7 @@ pip install yfinance
 
 ```bash
 python gem.py
+venv/bin/python gem.py
 ```
 
 This will:
