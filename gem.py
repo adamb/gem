@@ -24,8 +24,8 @@ if args.date:
 else:
     end_date = datetime.today()
 
-# Get about 500 days before the end date to ensure 252 trading days are covered
-start_date = end_date - timedelta(days=500)
+# Get about 380 days before the end date to ensure 252 trading days are covered
+start_date = end_date - timedelta(days=380)
 
 # Download adjusted close prices (default is now adjusted)
 data = yf.download(
@@ -57,11 +57,13 @@ for label, symbol in tickers.items():
             # Get the price from exactly 252 trading days before the current date
             if closest_date_idx >= 252:
                 past = data[symbol].iloc[closest_date_idx - 252]
+                current_date = data.index[closest_date_idx].strftime('%Y-%m-%d')
+                past_date = data.index[closest_date_idx - 252].strftime('%Y-%m-%d')
+                returns[label] = (current / past) - 1
+                print(f"{label} ({symbol}): {returns[label]*100:.2f}% (from {past_date} to {current_date})")
             else:
                 print(f"{label} ({symbol}): Not enough data (need 252 trading days before the calculation date)")
                 continue
-            returns[label] = (current / past) - 1
-            print(f"{label} ({symbol}): {returns[label]*100:.2f}%")
         else:
             print(f"{label} ({symbol}): Not enough data (need 252 days, have {len(data[symbol])})")
     else:
