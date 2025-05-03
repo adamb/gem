@@ -85,7 +85,7 @@ past = data[symbol].iloc[-200]
 
 - [OptimalMomentum.com](https://www.optimalmomentum.com/)
 - [Book on Amazon](https://www.amazon.com/Dual-Momentum-Investing-Innovative-Strategy/dp/0071849440)
-- [StockCharts GEM-style view](https://stockcharts.com/freecharts/perf.php?BIL,VOO,VEU,BND&n=200&O=111000)
+- [StockCharts GEM-style view](https://stockcharts.com/freecharts/perf.php?BIL,VOO,VEU,BND&n=252&O=111000)
 
 ---
 
