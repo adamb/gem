@@ -91,6 +91,10 @@ past = data[symbol].iloc[-200]
 
 ## ⚠️ Disclaimer
 
+The VOO return in the Python script uses SP500TR which includes dividends but the VEU doesn't.  
+
+So if it's close, check the [StockCharts GEM-style view](https://stockcharts.com/freecharts/perf.php?BIL,VOO,VEU,BND&n=252&O=111000) link.
+
 This is not financial advice. Use at your own risk. Educational purposes only.
 
 ---
