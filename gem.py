@@ -36,8 +36,8 @@ data = yf.download(
     auto_adjust=True  # explicitly set to use adjusted prices
 )
 
-# Keep just the 'Adj Close' prices
-data = data['Adj Close'].dropna()
+# When auto_adjust=True, we get adjusted prices in the 'Close' column
+data = data['Close'].dropna()
 
 # Print data info for debugging
 print(f"\nData shape: {data.shape}")
