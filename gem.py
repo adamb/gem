@@ -10,7 +10,7 @@ def parse_arguments():
 
 # Define tickers for GEM
 tickers = {
-    "SPY": "SPY",   # US stocks
+    "VOO": "VOO",   # US stocks
     "VEU": "VEU",   # International stocks
     "BND": "BND"    # Bonds
 }

@@ -3,7 +3,7 @@
 This is a simple Python script that implements the **Global Equities Momentum (GEM)** strategy popularized by Gary Antonacci in *Dual Momentum Investing*.
 
 It evaluates 252-trading-day momentum across:
-- **SPY** (U.S. stocks)
+- **VOO** (U.S. stocks)
 - **VEU** (International stocks)
 - **BND** (Bonds)
 
@@ -58,7 +58,7 @@ This will:
 ## 🧠 Strategy Logic
 
 1. Look back 252 trading days.
-2. Compare SPY, VEU, BND returns.
+2. Compare VOO, VEU, BND returns.
 3. If the best return is positive, invest in that asset.
 4. If not, stay in cash.
 5. Rebalance on a fixed day each month (e.g. the 5th).
