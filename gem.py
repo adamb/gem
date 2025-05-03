@@ -40,9 +40,14 @@ data = data['Close'].dropna()
 
 # Print data info for debugging
 print(f"\nData shape: {data.shape}")
-print(f"Data date range: {data.index[0]} to {data.index[-1]}")
-print(f"Trading days in dataset: {len(data)}")
-print(f"GEM calculation date: {end_date.strftime('%Y-%m-%d')}")
+if len(data) > 0:
+    print(f"Data date range: {data.index[0]} to {data.index[-1]}")
+    print(f"Trading days in dataset: {len(data)}")
+    print(f"GEM calculation date: {end_date.strftime('%Y-%m-%d')}")
+else:
+    print("No data retrieved. This could be due to rate limiting or no data available for the specified date range.")
+    print("Try again later or with a different date range.")
+    exit(1)  # Exit with error code
 
 # Calculate 252-trading-day returns
 returns = {}
