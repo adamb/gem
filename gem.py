@@ -65,8 +65,14 @@ for label, symbol in tickers.items():
                 past = data[symbol].iloc[closest_date_idx - 252]
                 current_date = data.index[closest_date_idx].strftime('%Y-%m-%d')
                 past_date = data.index[closest_date_idx - 252].strftime('%Y-%m-%d')
-                returns[label] = (current / past) - 1
+                
+                # Add detailed price information for debugging
+                current_price = data[symbol].iloc[closest_date_idx]
+                past_price = past
+                
+                returns[label] = (current_price / past_price) - 1
                 print(f"{label} ({symbol}): {returns[label]*100:.2f}% (from {past_date} to {current_date})")
+                print(f"  Start price: {past_price:.2f}, End price: {current_price:.2f}")
             else:
                 print(f"{label} ({symbol}): Not enough data (need 252 trading days before the calculation date)")
                 continue
