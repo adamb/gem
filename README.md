@@ -95,4 +95,4 @@ This is not financial advice. Use at your own risk. Educational purposes only.
 
 ---
 
-Built by [Adamo](#).
+Built by [adamb](https://github.com/adamb).
