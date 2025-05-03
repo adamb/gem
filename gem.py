@@ -27,16 +27,17 @@ else:
 # Get about 380 days before the end date to ensure 252 trading days are covered
 start_date = end_date - timedelta(days=380)
 
-# Download adjusted close prices (default is now adjusted)
+# Download data with adjusted close prices
 data = yf.download(
     list(tickers.values()),
     start=start_date.strftime("%Y-%m-%d"),
     end=end_date.strftime("%Y-%m-%d"),
-    threads=False  # avoid rate-limiting issues
+    threads=False,  # avoid rate-limiting issues
+    auto_adjust=True  # explicitly set to use adjusted prices
 )
 
-# Keep just the 'Close' prices
-data = data['Close'].dropna()
+# Keep just the 'Adj Close' prices
+data = data['Adj Close'].dropna()
 
 # Print data info for debugging
 print(f"\nData shape: {data.shape}")
