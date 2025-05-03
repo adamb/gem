@@ -10,9 +10,9 @@ def parse_arguments():
 
 # Define tickers for GEM
 tickers = {
-    "VOO": "VOO",   # US stocks
-    "VEU": "VEU",   # International stocks
-    "BND": "BND"    # Bonds
+    "SP500TR": "^SP500TR",   # US stocks (S&P 500 Total Return Index)
+    "VEU": "VEU",            # International stocks
+    "BND": "BND"             # Bonds
 }
 
 # Parse command line arguments
